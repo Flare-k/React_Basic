@@ -1,9 +1,26 @@
 import React from 'react';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: ''
+        };
+        this.addMore = this.addMore.bind(this);
+    }
+
+    addMore() {
+        this.setState({
+            name : "Kang"
+        });
+    }
+
     render() {
         return(
-            <h1>Hello</h1>
+            <div>
+                <button onClick={this.addMore}>Click Me</button>
+                <h1>Hello!!! {this.state.name}</h1>
+            </div>
         );
     }
 }
