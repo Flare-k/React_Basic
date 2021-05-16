@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactInfo from './ContactInfo';
 import ContactDetails from './ContactDetails';
+import update from 'react-addons-update';
 
 export default class Contact extends React.Component {
     constructor(props) {
@@ -17,6 +18,10 @@ export default class Contact extends React.Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        
+        this.handleCreate = this.handleCreate.bind(this);   //  데이터 추가
+        this.handleRemove = this.handleRemove.bind(this);   //  데이터 삭제
+        this.handleEdit = this.handleEdit.bind(this);   //  데이터 수정
     }
   
     // input에 입력이 가능하기 위해서는 target이 변하는걸 감지해야 한다.
@@ -32,6 +37,33 @@ export default class Contact extends React.Component {
         });
 
         console.log(key, " is selected");
+    }
+
+    handleCreate(contact) {
+        this.setState({
+            contactData: update(this.state.contactData, { $push: [contact] })
+        });
+    }
+
+    handleRemove() {
+        this.setState({
+            contactData: update(this.state.contactData,
+                { $splice: [[this.state.selectedKey, 1]] }
+            ),  //  selectedKey부터 1개 삭제
+            selectedKey: -1
+        });
+    }
+
+    handleEdit() {
+        this.setState({
+            contactData: update(this.state.contactData, 
+                {
+                    [this.state.selectedKey] : {    //  selectedKey번째 요소를 수정한다
+
+                    }
+                }    
+            )
+        })
     }
 
     render() {
