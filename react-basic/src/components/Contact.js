@@ -54,12 +54,13 @@ export default class Contact extends React.Component {
         });
     }
 
-    handleEdit() {
+    handleEdit(name, phone) {
         this.setState({
             contactData: update(this.state.contactData, 
                 {
                     [this.state.selectedKey] : {    //  selectedKey번째 요소를 수정한다
-
+                        name: { $set: name },
+                        phone: { $set: phone }  // 파라미터로 받은 name, phone으로 수정
                     }
                 }    
             )
