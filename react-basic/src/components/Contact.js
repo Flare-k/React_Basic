@@ -31,6 +31,8 @@ export default class Contact extends React.Component {
                 return contact.name.toLowerCase().indexOf(this.state.keyword) > -1;   // name에 search에 입력된 내용이 포함되어 있다면 true
             })
 
+            //  contact는 data parameter를 모두 할당하는 변수. 그리고 그 데이터의 각 인덱스를 i로 받아들인다.
+            //  key를 사용하는 이유? 각 데이터의 identity를 주기 위해서이다. 
             return data.map((contact, i) => {
                 return (<ContactInfo contact={contact} key={i}/>);
             });
