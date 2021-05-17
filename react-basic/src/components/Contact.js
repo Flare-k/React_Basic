@@ -1,7 +1,9 @@
 import React from 'react';
 import ContactInfo from './ContactInfo';
 import ContactDetails from './ContactDetails';
+import ContactCreate from './ContactCreate';
 import update from 'react-addons-update';
+
 
 export default class Contact extends React.Component {
     constructor(props) {
@@ -46,11 +48,15 @@ export default class Contact extends React.Component {
     }
 
     handleRemove() {
+        if (this.state.selectedKey < 0) {
+            return;
+        }   // 어떠한 것도 선택되지 않으면 아무 행동도 하지 않는다.
+
         this.setState({
             contactData: update(this.state.contactData,
                 { $splice: [[this.state.selectedKey, 1]] }
             ),  //  selectedKey부터 1개 삭제
-            selectedKey: -1
+            selectedKey: -1  // selectedKey를 -1로 다시 초기화
         });
     }
 
@@ -99,8 +105,13 @@ export default class Contact extends React.Component {
                 />
                 <div>{mapToComponent(this.state.contactData)}</div>
                 <ContactDetails 
-                        isSelected={this.state.selectedKey != -1}
-                        contact={this.state.contactData[this.state.selectedKey]}/>
+                    isSelected={this.state.selectedKey != -1}
+                    contact={this.state.contactData[this.state.selectedKey]}
+                    onRemove={this.handleRemove}
+                />
+                <ContactCreate
+                    onCreate={this.handleCreate}    // props 전달
+                />
             </div>
         );
     }
