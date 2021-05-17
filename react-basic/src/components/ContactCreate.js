@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ContactCreate extends React.Component {
+    // name, phone을 input으로 넣어야하기 때문에 state 생성
     constructor(props) {
         super(props);
         this.state = {

@@ -31,6 +31,7 @@ export default class Contact extends React.Component {
         this.setState({
             keyword: e.target.value
         });
+        // Search를 위한 handleChange
     }
 
     handleClick(key) {
@@ -70,11 +71,10 @@ export default class Contact extends React.Component {
                     }
                 }    
             )
-        })
+        });
     }
 
     render() {
-    
         const mapToComponent = (data) => {
             data.sort();
             data = data.filter((contact) => {
@@ -88,28 +88,32 @@ export default class Contact extends React.Component {
                             contact={contact} 
                             key={i}
                             onClick={() => this.handleClick(i)}
-                            />);
-                            //  기본 DOM에선 (div, input, button 등..) onClick이 적용된다.
-                            //  하지만 Component에선 onClick이 props로 전달되기 때문에 ContactInfo.js의 div에서 설정해줘야한다.
+                        />);
+                        //  기본 DOM에선 (div, input, button 등..) onClick이 적용된다.
+                        //  하지만 Component에선 onClick이 props로 전달되기 때문에 ContactInfo.js의 div에서 설정해줘야한다.
             });
         };
     
         return (
             <div>
                 <h1>Contacts</h1>
+                {/* Search */}
                 <input 
                     name="keyword"
                     placeholder='Search'
                     value={this.state.keyword}
                     onChange={this.handleChange}
                 />
+                {/* Contact List */}
                 <div>{mapToComponent(this.state.contactData)}</div>
+                {/* Contact Details */}
                 <ContactDetails 
                     isSelected={this.state.selectedKey != -1}
                     contact={this.state.contactData[this.state.selectedKey]}
                     onRemove={this.handleRemove}
                     onEdit={this.handleEdit}
                 />
+                {/* Create */}
                 <ContactCreate
                     onCreate={this.handleCreate}    // props 전달
                 />

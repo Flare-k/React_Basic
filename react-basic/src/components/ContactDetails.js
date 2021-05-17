@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// props는 상위 컴포넌트에서 전달받는다.
+
 export default class ContactDetails extends React.Component {
     // Edit을 눌렀을때 input으로 toggle할 수 있는 기능을 만들어야 한다.
     constructor(props) {
@@ -20,7 +22,7 @@ export default class ContactDetails extends React.Component {
     handleToggle() {
         if (!this.state.isEdit) {
             this.setState({
-                name: this.props.contact.name,
+                name: this.props.contact.name,      // Contact.js에서 contact={this.state.contactData[this.state.selectedKey]}으로 props 전달
                 phone: this.props.contact.phone
             });
         }
@@ -60,7 +62,7 @@ export default class ContactDetails extends React.Component {
                         placeholder="name" 
                         value={this.state.name}
                         onChange={this.handleChange}
-                        />
+                    />
                 </p>
                 <p>
                     <input 
@@ -69,7 +71,7 @@ export default class ContactDetails extends React.Component {
                         placeholder="phone" 
                         value={this.state.phone}
                         onChange={this.handleChange}
-                        />
+                    />
                 </p>
             </div>
         )
@@ -100,8 +102,8 @@ ContactDetails.defaultProps = {
         name: '',
         phone: ''
     },
-    onRemove: () => { console.error('onRemove not defined') },
-    onEdit: () => { console.error('onEdit not defined') },
+    onRemove: () => { console.error('onRemove not defined'); },
+    onEdit: () => { console.error('onEdit not defined'); },
 }
 
 ContactDetails.propTypes = {
