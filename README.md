@@ -72,6 +72,13 @@ react-hot-loader를 설치해줌으로써 특정 컴포넌트만 load 되도록 
 ## webpack 설정하기
 ```
 /react-basic 경로에 webpack.config.js 파일을 생성해줍니다.
+
+{
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
+}
+의 버전으로 설정하면 npm run dev-server시 에러없이 동작할 것입니다..!
 ```
 
 ## Reference
