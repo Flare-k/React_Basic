@@ -39,7 +39,7 @@ export default class ContactCreate extends React.Component {
     }
 
     handleKeyPress(e) {
-        if (e.charcode === 13) {    // 13 = enter
+        if (e.charCode === 13) {    // 13 = enter
             this.handleClick(); 
         }
     }

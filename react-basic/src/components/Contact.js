@@ -25,6 +25,26 @@ export default class Contact extends React.Component {
         this.handleRemove = this.handleRemove.bind(this);   //  데이터 삭제
         this.handleEdit = this.handleEdit.bind(this);   //  데이터 수정
     }
+
+    componentWillMount() {
+        // contactData 값이 localStorage 안에 존재한다면 setState를 통하여 저장된 값을 불러오자
+        const contactData = localStorage.contactData;
+
+        if (contactData) {
+            this.setState({
+                contactData: JSON.parse(contactData)
+            })
+        }
+    }
+
+    // component의 state가 업데이트될 때마다 실행되는 API
+    componentDidUpdate(preProps, preState) {
+        // 이전 값과 지금 값 비교
+        if (JSON.stringify(preState.contactData) != JSON.stringify(this.state.contactData)) {
+            localStorage.contactData = JSON.stringify(this.state.contactData);
+            
+        }
+    }
   
     // input에 입력이 가능하기 위해서는 target이 변하는걸 감지해야 한다.
     handleChange(e) {
