@@ -33,6 +33,9 @@ export default class ContactCreate extends React.Component {
             name: '',
             phone: ''
         });
+
+        this.nameInput.focus(); // 저장을 하고도 name input에 focus가 잡히게 된다. DOM 외에도 컴포넌트에서 ref 설정이 가능하다.
+        // rendering 메소드 내부와 constructor 내부에서는 ref에 접근할 수 없다.
     }
 
     handleKeyPress(e) {
@@ -52,6 +55,7 @@ export default class ContactCreate extends React.Component {
                         placeholder="name" 
                         value={this.state.name}
                         onChange={this.handleChange}
+                        ref={(ref) => {this.nameInput = ref}}   // name에 커서가 오는 포커스 설정
                     />
                     <input 
                         type="text" 
