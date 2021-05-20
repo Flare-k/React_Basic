@@ -17,6 +17,7 @@ export default class ContactDetails extends React.Component {
         this.handleToggle = this.handleToggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     handleToggle() {
@@ -39,6 +40,12 @@ export default class ContactDetails extends React.Component {
         let nextState = {}; // 빈 객체를 만들어준다. 이렇게 하면 여러개의 input 값을 받을 수 있다.
         nextState[e.target.name] = e.target.value;  //  input태그의 name (name과 phone)
         this.setState(nextState);
+    }
+
+    handleKeyPress(e) {
+        if (e.charcode === 13) {    // 13 = enter
+            this.handleToggle(); 
+        }
     }
 
     handleEdit() {
@@ -71,6 +78,7 @@ export default class ContactDetails extends React.Component {
                         placeholder="phone" 
                         value={this.state.phone}
                         onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
                     />
                 </p>
             </div>

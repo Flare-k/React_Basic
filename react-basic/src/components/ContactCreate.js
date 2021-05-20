@@ -12,6 +12,7 @@ export default class ContactCreate extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);   // 버튼 뿐만아니라 엔터를 눌러도 저장되도록..
     }   // state를 초기화해준다. 
 
     handleChange(e) {
@@ -34,6 +35,12 @@ export default class ContactCreate extends React.Component {
         });
     }
 
+    handleKeyPress(e) {
+        if (e.charcode === 13) {    // 13 = enter
+            this.handleClick(); 
+        }
+    }
+
     render() {
         return(
             <div>
@@ -52,6 +59,7 @@ export default class ContactCreate extends React.Component {
                         placeholder="phone" 
                         value={this.state.phone}
                         onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
                     />
                 </p>
                 <button onClick={this.handleClick}>Create</button>
